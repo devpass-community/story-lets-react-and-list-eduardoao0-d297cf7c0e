@@ -1,27 +1,37 @@
 import Container from './components/Container';
+import data from './products.json';
 
-const Item = ({ item }) => {
+const Item = ({ img, title, description, brand, price }) => {
   return (
-    <li className='item' data-testid='product-item'>
-      { /* TODO */ }
-      <img src="thumbnail here"></img>
-      <h4> title here </h4>
-      <p> description here </p>
-      <span> brand here </span>
-      <span> price here </span>
+    <li className='item' data-testid='product-item'>     
+      <img src={img} alt=''></img>     
+      <h4> {title} </h4>
+      <p>  {description} </p>
+      <span> {brand} </span>
+      <span> {price} </span>
     </li>
   )
 }
 
-function App() {
-  return (
+function App() { 
+
+   return (   
+    
     <Container>
-      <ul className='list' data-testid='product-list'>
-        { /* TODO */ }
-        <Item />
+      <ul className='list' data-testid='product-list'>           
+      {          
+          data.filter(data => data.category === "smartphones")
+          .map(dataFiltered => 
+                (
+                  <Item img={dataFiltered.thumbnail} title= {dataFiltered.title} description={dataFiltered.description} brand={dataFiltered.brand} price={dataFiltered.price}/>                  
+                )
+              )
+        }
       </ul>
-    </Container>
-  );
+     </Container> 
+   );
+
+ 
 }
 
 export default App;
